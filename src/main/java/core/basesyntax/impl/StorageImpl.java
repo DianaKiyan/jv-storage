@@ -21,11 +21,16 @@ public class StorageImpl<K, V> implements Storage<K, V> {
 
         if (index != -1) {
             values[index] = value;
-        } else {
-            keys[size] = key;
-            values[size] = value;
-            size++;
+            return;
         }
+
+        if (size == MAX_CAPACITY) {
+            return;
+        }
+
+        keys[size] = key;
+        values[size] = value;
+        size++;
     }
 
     @Override
@@ -48,4 +53,5 @@ public class StorageImpl<K, V> implements Storage<K, V> {
         return -1;
     }
 }
+
 
